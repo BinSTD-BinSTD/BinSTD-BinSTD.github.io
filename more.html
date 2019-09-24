@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>binSTD</title>
+  <link rel="stylesheet" type="text/css" href="./css/reset.css">
+  <link rel="stylesheet" type="text/css" href="./css/css.css">
+  <!-- <link rel="stylesheet" type="text/css" href="./css/strapdown.css">
+  <link rel="stylesheet" type="text/css" href="./css/readable.min.css"> -->
+  <script type="text/javascript" src="./js/jquery-1.11.0.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="./css/format.css">
+  <link href="./css/dark.css" rel="stylesheet">
+  <script src="./js/highlight.pack.js"></script>
+  <script >hljs.initHighlightingOnLoad();</script> 
+</head>
+<body>
+
+<header class="navbar">
+  <h2 class="fl"><a href="https://www.binstd.com">BinSTD</a></h2>
+  <div class="fr">
+    <!-- <div class="fl srch">
+      <input type="" name="" class="search">
+      <div class="pos">
+        <ul>
+          <li><a href="">232 > 32re</a></li>
+          <li><a href="">232</a></li>
+        </ul>
+      </div>
+    </div> -->
+    <a href="index.html">API大全</a>
+    <a href="more.html" class="active">更多</a>
+    <a href="javascript:;">github</a>
+  </div>
+  <div class="clear"></div>
+</header>
+<div class="content">
+  <div class="menu">
+    <h1>更多支持</h1>
+    <ul>
+      <li class="active">
+        <h2>介绍</h2>
+        <p class="active"><a href="#1_1">它是如何工作的？</a></p>
+        <p><a href="#1_2">快速上手</a></p>
+        <p><a href="#1_3">全局安装</a></p>
+        <p><a href="#1_4">现有项目</a></p>
+        <p><a href="#1_5">默认的页面路由</a></p>
+        <p><a href="#1_6">链接的重定向</a></p>
+      </li>
+      <li>
+        <h2>哈哈</h2>
+        <p class="active"><a href="#1_1">它是如何工作的？</a></p>
+        <p><a href="#1_2">快速上手</a></p>
+        <p><a href="#1_3">全局安装</a></p>
+        <p><a href="#1_4">现有项目</a></p>
+        <p><a href="#1_5">默认的页面路由</a></p>
+        <p><a href="#2_6">链接的重定向</a></p>
+      </li>
+    </ul>
+  </div>
+  <!-- <p>
+    <a href="https://localhost:9001/#/login?token=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOiIyMTkwMDAwMTU5MDAwMDcyNzkyIiwiYWN0aXZpdHkiOjEyNTl9.Bm_sRO7YDSOC2RJIrBWZsBQ5K75hk9jJxZDv7Ys6OnNyDHwUzhBYQjYT8QBtasCC8vR5LGRz6h1kNEKZn4ZV0A">活动1</a>
+  </p>
+  <p>
+    <a href="https://localhost:9001/#/login?token=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOiIyMTkwMDAwMTU5MDAwMDcyNzkyIiwiYWN0aXZpdHkiOjEyNTl9.Bm_sRO7YDSOC2RJIrBWZsBQ5K75hk9jJxZDv7Ys6OnNyDHwUzhBYQjYT8QBtasCC8vR5LGRz6h1kNEKZn4ZV0A">活动2</a>
+  </p> -->
+  <div class="right">
+    <div id="mdcontent">
+    </div>
+  </div>
+</div>
+<!-- <script type="text/javascript" src="./js/strapdown.js"></script> -->
+<script type="text/javascript">
+  $(document).ready(function(){
+    function getMd(file) {
+      $.ajax({
+        url: './md/more' + file,
+        type: "get",
+        success: function (data) {
+          $("#mdcontent").html(data);
+          $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        }
+      })
+    }
+    getMd('1.md')
+
+    $('.menu li p').click(function(e){
+      $(this).addClass('active').siblings('p').removeClass('active')
+      e.stopPropagation()
+    })
+    $('.menu li').click(function(){
+      var index = $(this).index() + 1
+      getMd(index + '.md')
+      $(this).addClass('active').siblings('li').removeClass('active')
+    })
+    $('.search').on('input propertychange',function(){
+      $('.pos ul').html('')
+      var v = $(this).val()
+      if (v) {
+        $('.menu p').each(function(i1,v1){
+          var t = $(v1).text()
+          
+          if(t.indexOf(v) > -1) {
+            $('.pos ul').append('<li>' + $(v1).html()  + '</li>')
+          }
+        })
+      }
+    })
+    $(document).on('click','.pos a',function(){
+      var m = $(this).attr('href').split('_')[0].substr(1)
+      console.log(m)
+      getMd(m + '.md')
+    })
+  })
+</script>
+</body>
+</html>
