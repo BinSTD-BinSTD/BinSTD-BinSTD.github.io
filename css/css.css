@@ -2,8 +2,10 @@ html,body { height: 100%; font-size: 14px; }
 .navbar { position: fixed; width: 100%; z-index: 20; right: 0; height: 59px; background-color: #fff; box-sizing: border-box; border-bottom: 1px solid #eaecef; line-height: 59px; padding: 0 20px;}
 .navbar a { color: #666; margin-left: 20px; position: relative; border-bottom: 2px solid transparent; }
 .navbar a.active { color: #666; text-decoration: none; border-bottom-color: #46bd87;}
+.navbar a img { position: absolute; top: -10px; width: 120px;}
+.text-center { text-align: center; }
 .content { box-sizing: border-box; height: 100%; padding-top: 60px; }
-.menu { height: 100%; position: fixed; width: 320px; box-sizing: border-box; padding: 20px; padding-left: 0; overflow: auto; border-right: 1px solid #eaecef; line-height: 24px; }
+.menu { height: calc(100% - 60px); position: fixed; width: 320px; box-sizing: border-box; padding: 20px; padding-left: 0; overflow: auto; border-right: 1px solid #eaecef; line-height: 24px; }
 .menu li p { display: none; }
 .menu li {cursor: pointer;}
 .menu li.active p { display: block; }
