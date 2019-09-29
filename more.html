@@ -69,7 +69,7 @@
   $(document).ready(function(){
     function getMd(file) {
       $.ajax({
-        url: './md/more' + file,
+        url: './md/more/' + file,
         type: "get",
         success: function (data) {
           $("#mdcontent").html(data);
@@ -79,7 +79,7 @@
         }
       })
     }
-    getMd('/1.md')
+    getMd('1.md')
 
     $('.menu li p').click(function(e){
       $(this).addClass('active').siblings('p').removeClass('active')
