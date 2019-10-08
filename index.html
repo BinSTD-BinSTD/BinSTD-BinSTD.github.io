@@ -2,7 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>进制数据</title>
+  <title>api接口大全，免费数据接口大全列表-进制数据</title>
+  <meta name="keywords" content="api接口大全,数据接口大全">
+  <meta name="descrption" content="进制数据精心制作API接口大全，其中包括生活常用、工具万能、交通出行、金融理财、图像识别、位置服务、新闻媒体等大类数据接口，提供较为全面的免费数据接口大全，方便开发者查找所需的API数据接口，节省开发成本是时间。">
   <link rel="stylesheet" type="text/css" href="./css/reset.css">
   <link rel="stylesheet" type="text/css" href="./css/css.css">
   <!-- <link rel="stylesheet" type="text/css" href="./css/strapdown.css">
@@ -18,9 +20,13 @@
 <header class="navbar">
   <h2 class="fl"><a href="https://www.binstd.com"><img src="./img/logov2.png"></a></h2>
   <div class="fr">
-    <!-- <div class="fl srch">
-      <input type="" name="" placeholder="请输入搜索内容">
-    </div> -->
+    <div class="fl srch">
+      <input type="" name="" class="search">
+      <div class="pos">
+        <ul>
+        </ul>
+      </div>
+    </div>
     <a href="index.html" class="active">API大全</a>
     <a href="more.html">更多</a>
     <a href="https://github.com/BinSTD-BinSTD">github</a>
@@ -123,19 +129,21 @@
 <!-- <script type="text/javascript" src="./js/strapdown.js"></script> -->
 <script type="text/javascript">
   $(document).ready(function(){
-    function getMd(file) {
+    function getMd(file, fn) {
       $.ajax({
         url: './md/index/' + file,
         type: "get",
         success: function (data) {
-          $("#mdcontent").html(data);
-          $('pre code').each(function(i, block) {
-            hljs.highlightBlock(block);
-          });
+          fn(data)
         }
       })
     }
-    getMd('1.md')
+    getMd('1.md', function(data){
+      $("#mdcontent").html(data);
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    })
 
     $('.menu li p').click(function(e){
       $(this).addClass('active').siblings('p').removeClass('active')
@@ -143,10 +151,77 @@
     })
     $('.menu li').click(function(){
       var index = $(this).index() + 1
-      getMd(index + '.md')
+      getMd(index + '.md', function(data){
+        $("#mdcontent").html(data);
+        $('pre code').each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
+      })
       $(this).addClass('active').siblings('li').removeClass('active')
     })
 
+    var n = 0
+    $('.search').on('input propertychange',function(){
+      $('.pos ul').empty()
+      n = 0
+      var v = $(this).val()
+      if (v) {
+        $('.pos').show()
+        $('.menu p').each(function(i1,v1){
+          var t = $(v1).text()
+          if(t.indexOf(v) > -1) {
+            var cl = $(v1).clone()
+            var h2 = $(this).parents('li').find('h2').text()
+            cl.find('a').text(h2 + ' > ' + $(v1).text())
+            $('.pos ul').append('<li>' + cl.html()  + '</li>')
+            //$('.pos li').eq(0).addClass('active').siblings('li').removeClass('active')
+          }
+        })
+      } else {
+        $('.pos').hide()
+      }
+    })
+    // $('.search').keydown(function(e){
+    //   var length = $('.pos li').length
+    //   // 上箭头
+    //   if (e.keyCode == 38 && n > 0) {
+    //     $('.pos li').eq(--n).addClass('active').siblings('li').removeClass('active')
+    //     if (n < 10) {
+    //       $('.pos').scrollTop(0)
+    //     }
+    //   }
+    //   // 下箭头
+    //   if (e.keyCode == 40 && n < length) {
+    //     $('.pos li').eq(++n).addClass('active').siblings('li').removeClass('active')
+    //     if (n > 9) {
+    //       $('.pos').scrollTop((n - 9) * 40)
+    //     }
+    //   }
+    // })
+    $(document).on('click','.pos a',function(){
+      var m = $(this).attr('href').split('_')[0].substr(1)
+      var n = $(this).attr('href').split('_')[1]
+      var _this = $(this)
+      $(this).parents('li').addClass('active').siblings('li').removeClass('active')
+      $('.menu ul li').eq(m - 1).addClass('active').siblings('li').removeClass('active')
+      $('.menu ul li').eq(m - 1).find('p').eq(n - 1).addClass('active').siblings('p').removeClass('active')
+      getMd(m + '.md', function(data){
+        $("#mdcontent").html(data);
+        $('pre code').each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
+        $('html,body').animate({ 
+          scrollTop:$(_this.attr('href')).offset().top
+        }, 30);
+      })
+    })
+    $(document).on('click',function(e){
+      var _con = $('.srch .pos')
+      if(!_con.is(e.target) && _con.has(e.target).length === 0){
+        $('.search').val('')
+        $('.srch .pos').hide()
+      }
+    });
   })
 </script>
 </body>
