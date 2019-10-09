@@ -20,9 +20,10 @@ html,body { height: 100%; font-size: 14px; }
 .srch { position: relative; }
 .srch input { height: 32px; border: 1px solid #ccc; border-radius: 16px; padding-left: 32px; background: url(../img/search.png) 10px no-repeat; background-size: 13px;}
 .srch input:focus { border-color: #3eaf7c; }
-.pos { position: absolute; line-height: 18px; box-shadow: 0 0 10px #666; width: 250px; left: -60px; background-color: #fff; z-index: 20; border-radius: 10px; max-height: 400px; overflow: auto; display: none;}
+.pos { position: absolute; line-height: 18px; box-shadow: 0 0 10px #666; width: 300px; left: -110px; background-color: #fff; z-index: 20; border-radius: 10px; max-height: 400px; overflow: auto; display: none;}
 .pos li { padding: 10px;}
 .pos li.active { background-color: #eee; }
 .pos li.active a { color:#3eaf7c; }
 .pos a { color: #070144; }
 .navbar .pos a { margin-left: 0; display: block; }
+.hidden { display: none; }
