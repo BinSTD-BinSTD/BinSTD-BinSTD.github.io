@@ -32,7 +32,7 @@
       <ul>
         <li class="active">
           <h2>生活常用</h2>
-          <p class="active"><a href="#1_1">快递查询ya</a></p>
+          <p class="active"><a href="#1_1">快递查询</a></p>
           <p><a href="#1_2">短信</a></p>
           <p><a href="#1_3">IP查询</a></p>
           <p><a href="#1_4">全国天气预报</a></p>
