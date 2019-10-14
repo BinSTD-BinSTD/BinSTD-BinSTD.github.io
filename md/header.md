@@ -11,7 +11,7 @@
 <body>
 
 <header class="navbar">
-  <h2 class="fl"><a href="https://www.binstd.com"><img src="./img/logov2.png"></a></h2>
+  <h2 class="fl"><a rel="nofollow" href="https://www.binstd.com"><img src="./img/logov2.png"></a></h2>
   <div class="fr">
     <div class="fl srch">
       <input type="" name="" class="search">
@@ -20,9 +20,9 @@
         </ul>
       </div>
     </div>
-    <a href="javascript:;" class="active">API大全</a>
+    <a rel="nofollow" href="javascript:;" class="active">API大全</a>
     <a href="javascript:;">更多</a>
-    <a href="https://github.com/BinSTD-BinSTD">github</a>
+    <a rel="nofollow" href="https://github.com/BinSTD-BinSTD">github</a>
   </div>
   <div class="clear"></div>
 
